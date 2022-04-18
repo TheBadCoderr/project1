@@ -1,0 +1,45 @@
+<div class="main-container d-flex p-3">
+  <div class="leftpart">
+    <div class="p-3 d-flex sticky align-items-center">
+      <div><h3>Dashboard</h3></div>
+      <div class="wrap ml-5">
+        <form class="example ml-5" action="">
+          <input type="text" [(ngModel)]="userNamesToSearch" placeholder="Search.." name="search" (keyup)="keyUpInput()">
+          <button type="submit" (click)="clickSubmit()"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+      <div (click)="clickHistory()" class="historyTitle ml-3">history</div>
+    </div>
+    
+    <div class="mt-5 pt-5" *ngIf="userNamesToSearch.length > 0 && historyClicked == false">
+      <h5>Search Result</h5>
+      <div *ngFor="let item of userDetails | filter:userNamesToSearch">
+        <div class="result-container pl-5">
+          <p (click)="clickResult(item)">{{ item.login }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 pt-5 historyPanel" *ngIf="historyClicked == true">
+      <h5>Searched History</h5>
+      <div *ngFor="let item of historyArr">
+        <div class="result-container pl-5">
+          <p>{{ item }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rightpart" *ngIf="userNamesToSearch.length > 0 && resultClicked == true">
+    <div class="card-container">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{imgSrc}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ userTitle }}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Visit Profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
